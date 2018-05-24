@@ -1,11 +1,13 @@
-/* CSS files add styling rules to your content */
-
-body {
-  font-family: "Benton Sans", "Helvetica Neue", helvetica, arial, sans-serif;
-  margin: 2em;
+#movies img, #movie img{
+  width:100%;
 }
 
-h1 {
-  font-style: italic;
-  color: #373fff;
+@media(min-width:960px){
+  #movies .col-md-3 .well{
+    height: 390px;
+  }
+
+  #movies .col-md-3 img{
+    height:240px;
+  }
 }
