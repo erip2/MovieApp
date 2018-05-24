@@ -25,13 +25,17 @@ function getMovies(searchText) {
       let movie = data.results;
       output.innerHTML = '';
       movie.forEach(function(m, i) {
+        
         if(m.poster_path == null) {
-          m.poster_path = '/no-img';
+          m.poster_path = 'https://cdn.glitch.com/833b6908-d1bb-4b8d-aef7-4cdaaa642c4a%2Fno-img.png?1527172635831';
+        } else {
+          m.poster_path = 'http://image.tmdb.org/t/p/w185/' + m.poster_path;
         }
+        
         output.innerHTML +=    '<div class="col-md-3">' + 
                '<div class="well text-center">' +
-                '<img src="http://image.tmdb.org/t/p/w185/' + m.poster_path + ' ">' +
-              '<div class="well text-center for-btn">' +
+                '<img src="' + m.poster_path + ' ">' +
+              '<div class="text-center for-btn">' +
                 '<h5>' + m.title + '</h5>' +
                 '<a class="btn btn-primary" href="https://www.themoviedb.org/movie/' + m.id + '">Movie Details</a>' +
               '</div>' +
