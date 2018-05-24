@@ -9,16 +9,20 @@ async function getData()
         //proceed only when the second promise is resolved
         return data;
     }
+
 //call getData function
 getData()
 .then(data => {
     let movie = data.results;
+    console.log(movie);
     output.innerHTML = '';
     movie.forEach(function(m, i) {
       output.innerHTML +=    '<div class="col-md-3">' + 
+             '<div class="well text-center">' +
+              '<img src="http://image.tmdb.org/t/p/w185/' + m.poster_path + ' ">' +
             '<div class="well text-center">' +
-              '<h5>' + movie.Title + '</h5>' +
-              // '<a onclick="movieSelected('' + ${movie.imdbID} + '')" class="btn btn-primary" href="#">Movie Details</a>
+              '<h5>' + m.title + '</h5>' +
+              '<a class="btn btn-primary" href=" +">Movie Details</a>' +
             '</div>' +
           '</div>'
     });
