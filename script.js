@@ -1,9 +1,11 @@
 var output = document.getElementById('movies');
 
-async function getData() 
+
+function getMovies(searchText) {
+  async function getData() 
     {
         //await the response of the fetch call
-       let response = await fetch('https://api.themoviedb.org/3/search/movie?api_key=9d58539c5ba127904dce76603c0bcbca&language=en-US&query=Fast&page=1&include_adult=true');
+       let response = await fetch('https://api.themoviedb.org/3/search/movie?api_key=9d58539c5ba127904dce76603c0bcbca&language=en-US&query=' + searchText + '&page=1&include_adult=true');
         //proceed once the first promise is resolved.
        let data = await response.json()
         //proceed only when the second promise is resolved
@@ -22,10 +24,12 @@ getData()
               '<img src="http://image.tmdb.org/t/p/w185/' + m.poster_path + ' ">' +
             '<div class="well text-center">' +
               '<h5>' + m.title + '</h5>' +
-              '<a class="btn btn-primary" href=" +">Movie Details</a>' +
+              '<a class="btn btn-primary" href="https://www.themoviedb.org/movie/' + m.id + '">Movie Details</a>' +
             '</div>' +
           '</div>'
     });
-});//log the data
+});//log the data  
+}
 
-getData();
+
+getMovies();
