@@ -44,3 +44,7 @@ function getMovies(searchText) {
   });//log the data  
 }
 
+function getMovie() {
+  
+}
+
