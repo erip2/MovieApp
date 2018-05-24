@@ -24,6 +24,7 @@ function getMovies(searchText) {
   .then(data => {
       let movie = data.results;
       output.innerHTML = '';
+    console.log(movie);
       movie.forEach(function(m, i) {
         
         if(m.poster_path == null) {
@@ -55,7 +56,7 @@ function getMovie(id) {
   
   async function getData() {
     //await the response of the fetch call
-    let response = await fetch('https://api.themoviedb.org/3/search/movie?api_key=9d58539c5ba127904dce76603c0bcbca&language=en-US&query=' + searchText + '&include_adult=true');
+    let response = await fetch('https://api.themoviedb.org/3/search/movie?api_key=9d58539c5ba127904dce76603c0bcbca&language=en-US&query=' + id + '&include_adult=true');
     //proceed once the first promise is resolved.
     let data = await response.json()
     //proceed only when the second promise is resolved
