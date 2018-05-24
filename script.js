@@ -37,14 +37,34 @@ function getMovies(searchText) {
                 '<img src="' + m.poster_path + ' ">' +
               '<div class="text-center for-btn">' +
                 '<h5>' + m.title + '</h5>' +
-                '<a class="btn btn-primary" href="https://www.themoviedb.org/movie/' + m.id + '">Movie Details</a>' +
+                '<a class="btn btn-primary" onclick="movieSelected(' + m.id + ')">Movie Details</a>' +
               '</div>' +
             '</div>'
       });
   });//log the data  
 }
 
-function getMovie() {
+function movieSelected(id){
+  sessionStorage.setItem('movieId', id);
+  window.location = 'movie.html';
+  return false;
+}
+
+function getMovie(id) {
+  let movieId = sessionStorage.getItem('movieId');
   
+  async function getData() {
+    //await the response of the fetch call
+    let response = await fetch('https://api.themoviedb.org/3/search/movie?api_key=9d58539c5ba127904dce76603c0bcbca&language=en-US&query=' + searchText + '&include_adult=true');
+    //proceed once the first promise is resolved.
+    let data = await response.json()
+    //proceed only when the second promise is resolved
+    return data;
+  }
+
+  //call getData function
+  getData()
+  .then(data => {
+  });
 }
 
