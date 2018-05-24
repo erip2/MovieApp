@@ -24,7 +24,7 @@ function getMovies(searchText) {
   .then(data => {
       let movie = data.results;
       output.innerHTML = '';
-    console.log(movie);
+      console.log(movie);
       movie.forEach(function(m, i) {
         
         if(m.poster_path == null) {
@@ -33,14 +33,14 @@ function getMovies(searchText) {
           m.poster_path = 'http://image.tmdb.org/t/p/w185/' + m.poster_path;
         }
         
-        output.innerHTML +=    '<div class="col-md-3">' + 
-               '<div class="well text-center">' +
-                '<img src="' + m.poster_path + ' ">' +
-              '<div class="text-center for-btn">' +
-                '<h5>' + m.title + '</h5>' +
-                '<a class="btn btn-primary" onclick="movieSelected(' + m.id + ')">Movie Details</a>' +
-              '</div>' +
-            '</div>'
+        output.innerHTML +=    `<div class="col-md-3"> 
+               <div class="well text-center">
+                <img src="${m.poster_path}">
+              <div class="text-center for-btn">
+                <h5>${m.title}</h5>
+                <a class="btn btn-primary" onclick="movieSelected(${m.id})">Movie Details</a>
+              </div>
+            </div>`
       });
   });//log the data  
 }
