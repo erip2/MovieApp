@@ -1,3 +1,5 @@
+var output = document.getElementById('movies');
+
 async function getData() 
     {
         //await the response of the fetch call
@@ -11,11 +13,15 @@ async function getData()
 getData()
 .then(data => {
     let movie = data.results;
-  console.log(movie);
-    // <div class="col-md-3">
-    //         <div class="well text-center">
-    //           <h5>${movie.Title}</h5>
-    //           <a onclick="movieSelected('${movie.imdbID}')" class="btn btn-primary" href="#">Movie Details</a>
-    //         </div>
-    //       </div>
+    output.innerHTML = '';
+    movie.forEach(function(m, i) {
+      output.innerHTML +=    '<div class="col-md-3">' + 
+            '<div class="well text-center">' +
+              '<h5>' + movie.Title + '</h5>' +
+              // '<a onclick="movieSelected('' + ${movie.imdbID} + '')" class="btn btn-primary" href="#">Movie Details</a>
+            '</div>' +
+          '</div>'
+    });
 });//log the data
+
+getData();
