@@ -32,7 +32,17 @@ function getMovies(searchText) {
           m.poster_path = 'http://image.tmdb.org/t/p/w185/' + m.poster_path;
         }
         
-        output.innerHTML +=    `<div class="col-md-3"> 
+        output.innerHTML +=  `<div class="card" style="width: 18rem;">
+                                <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+                                  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+          
+          
+          `<div class="col-md-3"> 
                <div class="well text-center">
                 <img src="${m.poster_path}">
               <div class="text-center for-btn">
@@ -52,7 +62,7 @@ function movieSelected(id) {
 }
 
 function getMovie() {
-  let movieId = sessionStorage.getItem('movieDetails');
+    let movieId = sessionStorage.getItem('movieDetails');
   
     async function getData() {
     //await the response of the fetch call
