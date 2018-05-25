@@ -46,13 +46,15 @@ function getMovies(searchText) {
 }
 
 function movieSelected(searchText, i) {
-  sessionStorage.setItem('movieId', [searchText, i]);
+  sessionStorage.setItem('movieText', searchText);
+  sessionStorage.setItem('movieId', i);
   window.location = 'movie.html';
   return false;
 }
 
 function getMovie() {
-  let searchText = sessionStorage.getItem('movieId', [0]);
+  let searchText = sessionStorage.getItem('movieText');
+  let movieIndex = sessionStorage.getItem('movieId')
   console.log(searchText);
   
     async function getData() {
@@ -67,40 +69,45 @@ function getMovie() {
   //call getData function
   getData()
   .then(data => {
-    let movie = data.results[0];
-    window.location = 'movie.html';
+    let movie = data.results[movieIndex];
     console.log(movie);
     
-//      let output =`
-//         <div class="row">
-//           <div class="col-md-4">
-//             <img src="${movie.Poster}" class="thumbnail">
-//           </div>
-//           <div class="col-md-8">
-//             <h2>${movie.Title}</h2>
-//             <ul class="list-group">
-//               <li class="list-group-item"><strong>Genre:</strong> ${movie.Genre}</li>
-//               <li class="list-group-item"><strong>Released:</strong> ${movie.Released}</li>
-//               <li class="list-group-item"><strong>Rated:</strong> ${movie.Rated}</li>
-//               <li class="list-group-item"><strong>IMDB Rating:</strong> ${movie.imdbRating}</li>
-//               <li class="list-group-item"><strong>Director:</strong> ${movie.Director}</li>
-//               <li class="list-group-item"><strong>Writer:</strong> ${movie.Writer}</li>
-//               <li class="list-group-item"><strong>Actors:</strong> ${movie.Actors}</li>
-//             </ul>
-//           </div>
-//         </div>
-//         <div class="row">
-//           <div class="well">
-//             <h3>Plot</h3>
-//             ${movie.Plot}
-//             <hr>
-//             <a href="http://imdb.com/title/${movie.imdbID}" target="_blank" class="btn btn-primary">View IMDB</a>
-//             <a href="index.html" class="btn btn-default">Go Back To Search</a>
-//           </div>
-//         </div>
-//       `;
+    if(movie.poster_path == null) {
+      movie.poster_path = 'https://cdn.glitch.com/833b6908-d1bb-4b8d-aef7-4cdaaa642c4a%2Fno-img.png?1527172635831';
+    } else {
+      movie.poster_path = 'http://image.tmdb.org/t/p/w185/' + movie.poster_path;
+    }
     
-//     document.getElementById('movie').innerHTML = output;
+     let output =`
+        <div class="row">
+          <div class="col-md-4">
+            <img src="${movie.poster_path}" class="thumbnail">
+          </div>
+          <div class="col-md-8">
+            <h2>${movie.original_title}</h2>
+            <ul class="list-group">
+              <li class="list-group-item"><strong>Genre:</strong> ${movie.Genre}</li>
+              <li class="list-group-item"><strong>Released:</strong> ${movie.release_date}</li>
+              <li class="list-group-item"><strong>Rated:</strong> ${movie.Rated}</li>
+              <li class="list-group-item"><strong>IMDB Rating:</strong> ${movie.imdbRating}</li>
+              <li class="list-group-item"><strong>Director:</strong> ${movie.Director}</li>
+              <li class="list-group-item"><strong>Writer:</strong> ${movie.Writer}</li>
+              <li class="list-group-item"><strong>Actors:</strong> ${movie.Actors}</li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="well">
+            <h3>Plot</h3>
+            ${movie.Plot}
+            <hr>
+            <a href="http://imdb.com/title/${movie.imdbID}" target="_blank" class="btn btn-primary">View IMDB</a>
+            <a href="index.html" class="btn btn-default">Go Back To Search</a>
+          </div>
+        </div>
+      `;
+    
+    document.getElementById('movie').innerHTML = output;
   });
 }
 
