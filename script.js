@@ -84,7 +84,7 @@ function getMovie() {
             <ul class="list-group">
               <li class="list-group-item"><strong>Genre:</strong>
                 ${movie.genres.map(function(genre) {
-                  return genre.name;
+                  return ' ' + genre.name;
                 })}
             </li>
               <li class="list-group-item"><strong>Released:</strong> ${movie.release_date}</li>

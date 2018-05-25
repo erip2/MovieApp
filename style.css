@@ -6,6 +6,12 @@
   margin-right: 92px;
   margin-bottom: 20px;
   text-align: center;
+  flex-grow: 1;
+  max-width: 25%;
+}
+
+.row {
+  margin-left: 0 !important;
 }
 
 @media(min-width:960px){
