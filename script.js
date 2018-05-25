@@ -10,6 +10,7 @@ searchInput.addEventListener('keyup', function(e) {
 
 
 function getMovies(searchText) {
+  output.innerHTML = 'Loading';
   async function getData() {
     //await the response of the fetch call
     let response = await fetch('https://api.themoviedb.org/3/search/movie?api_key=9d58539c5ba127904dce76603c0bcbca&language=en-US&query=' + searchText + '&include_adult=true');
@@ -24,7 +25,11 @@ function getMovies(searchText) {
   .then(data => {
       let movie = data.results;
       output.innerHTML = '';
-      console.log(movie);
+    
+      if(movie == 0) {
+        output.innerHTML = 'No results';
+      }
+    
       movie.forEach(function(m, i) {
         
         if(m.poster_path == null) {
