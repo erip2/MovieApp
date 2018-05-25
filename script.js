@@ -38,14 +38,14 @@ function getMovies(searchText) {
                 <img src="${m.poster_path}">
               <div class="text-center for-btn">
                 <h5>${m.title}</h5>
-                <a class="btn btn-primary" id="${i}" onclick="movieSelected('${searchText}', ${i})" href="#">Movie Details</a>
+                <a class="btn btn-primary" id="${i}" onclick="movieSelected(${m.id})" href="#">Movie Details</a>
               </div>
             </div>`
       });
   });//log the data  
 }
 
-function movieSelected(searchText, i) {
+function movieSelected(id) {
   sessionStorage.setItem('movieText', searchText);
   sessionStorage.setItem('movieId', i);
   window.location = 'movie.html';
@@ -55,11 +55,10 @@ function movieSelected(searchText, i) {
 function getMovie() {
   let searchText = sessionStorage.getItem('movieText');
   let movieIndex = sessionStorage.getItem('movieId')
-  console.log(searchText);
   
     async function getData() {
     //await the response of the fetch call
-    let response = await fetch('https://api.themoviedb.org/3/search/movie?api_key=9d58539c5ba127904dce76603c0bcbca&language=en-US&query=' + searchText + '&include_adult=true');
+    let response = await fetch('https://api.themoviedb.org/3/movie/' +  + '?api_key=9d58539c5ba127904dce76603c0bcbca&language=en-US');
     //proceed once the first promise is resolved.
     let data = await response.json()
     //proceed only when the second promise is resolved
@@ -110,4 +109,25 @@ function getMovie() {
     document.getElementById('movie').innerHTML = output;
   });
 }
+
+//Create the XHR Object
+let xhr = new XMLHttpRequest;
+//Call the open function, GET-type of request, url, true-asynchronous
+xhr.open('GET', 'https://api.themoviedb.org/3/movie/600?api_key=9d58539c5ba127904dce76603c0bcbca&language=en-US', true)
+//call the onload 
+xhr.onload = function() 
+    {
+        //check if the status is 200(means everything is okay)
+        if (this.status === 200) 
+            {
+                //return server response as an object with JSON.parse
+                console.log(JSON.parse(this.responseText));
+    }
+            }
+//call send
+xhr.send();
+//Common Types of HTTP Statuses
+// 200: OK
+// 404: ERROR
+// 403: FORBIDDEN
 
