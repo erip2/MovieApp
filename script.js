@@ -4,7 +4,8 @@ var searchInput = document.getElementById('searchText');
 searchInput.addEventListener('keyup', function(e) {
   e.preventDefault();
   if(e.keyCode == 13) {
-    console.log(data.getMovies(searchInput.value));
+    data.getMovies(searchInput.value);
+    view.displayResults(data.getMovies(searchInput.value));
   }
 });
 
@@ -30,6 +31,7 @@ var data = {
 
 var view = {
   displayResults: function(data) {
+    debugger;
     console.log(data)
 //      let movie = data.results;
 //       output.innerHTML = '';
