@@ -8,6 +8,7 @@ searchInput.addEventListener('keyup', function(e) {
   }
 });
 
+
 function getMovies(searchText) {
   async function getData() {
     //await the response of the fetch call
