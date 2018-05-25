@@ -4,59 +4,9 @@ var searchInput = document.getElementById('searchText');
 searchInput.addEventListener('keyup', function(e) {
   e.preventDefault();
   if(e.keyCode == 13) {
-    data.getMovies(searchInput.value);
+    getMovies(searchInput.value);
   }
 });
-
-var data = {
-    //Create the XHR Object
-    getMovies: function(searchText) {
-  
-    let xhr = new XMLHttpRequest;
-    //Call the open function, GET-type of request, url, true-asynchronous
-    xhr.open('GET', 'https://api.themoviedb.org/3/search/movie?api_key=9d58539c5ba127904dce76603c0bcbca&language=en-US&query=' + searchText + '&include_adult=true', true)
-    //call the onload 
-    xhr.onload = function() 
-        {
-            //check if the status is 200(means everything is okay)
-            if (this.status === 200) 
-                {
-                    //return server response as an object with JSON.parse
-                    return JSON.parse(this.responseText);
-        }
-                }
-    //call send
-    xhr.send();
-    //Common Types of HTTP Statuses
-    // 200: OK
-    // 404: ERROR
-    // 403: FORBIDDEN
-    }
-}
-
-var view = {
-  displayResults: function() {
-       let movie = data.results;
-      output.innerHTML = '';
-      console.log(movie);
-      movie.forEach(function(m, i) {
-        
-        if(m.poster_path == null) {
-          m.poster_path = 'https://cdn.glitch.com/833b6908-d1bb-4b8d-aef7-4cdaaa642c4a%2Fno-img.png?1527172635831';
-        } else {
-          m.poster_path = 'http://image.tmdb.org/t/p/w185/' + m.poster_path;
-        }
-        
-        output.innerHTML +=    `<div class="col-md-3"> 
-               <div class="well text-center">
-                <img src="${m.poster_path}">
-              <div class="text-center for-btn">
-                <h5>${m.title}</h5>
-                <a class="btn btn-primary" id="${i}" onclick="movieSelected(${m.id})" href="#">Movie Details</a>
-              </div>
-            </div>`
-  }
-}
 
 
 function getMovies(searchText) {
@@ -135,7 +85,7 @@ function getMovie() {
             <ul class="list-group">
               <li class="list-group-item"><strong>Genre:</strong>
                 ${movie.genres.map(function(genre) {
-                  return genre.name
+                  return ${genre.name};
                 })};
             </li>
               <li class="list-group-item"><strong>Released:</strong> ${movie.release_date}</li>
