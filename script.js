@@ -45,18 +45,12 @@ function getMovies(searchText) {
   });//log the data  
 }
 
-function movieSelected(id){
-  sessionStorage.setItem('movieId', id);
-  //window.location = 'movie.html';
-  //return false;
-}
-
 function getMovie(id) {
   let movieId = sessionStorage.getItem('movieId');
   
     async function getData() {
     //await the response of the fetch call
-    let response = await fetch('https://api.themoviedb.org/3/search/movie?api_key=9d58539c5ba127904dce76603c0bcbca&language=en-US&query=' + id + '&include_adult=true');
+    let response = await fetch('https://api.themoviedb.org/3/search/movie?api_key=9d58539c5ba127904dce76603c0bcbca&language=en-US&query=' + movieId + '&include_adult=true');
     //proceed once the first promise is resolved.
     let data = await response.json()
     //proceed only when the second promise is resolved
