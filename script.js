@@ -75,10 +75,6 @@ function getMovie() {
       movie.poster_path = 'http://image.tmdb.org/t/p/w185/' + movie.poster_path;
     }
     
-    movie.genre.forEach(function(g) {
-      return `<li class="list-group-item">${g.names}<strong>Genre:</strong></li>`;
-    });
-    
      let output =`
         <div class="row">
           <div class="col-md-4">
@@ -87,7 +83,11 @@ function getMovie() {
           <div class="col-md-8">
             <h2>${movie.original_title}</h2>
             <ul class="list-group">
-              <li class="list-group-item"><strong>Genre:</strong></li>
+              <li class="list-group-item"><strong>Genre:</strong>
+                ${movie.genres.map(function(genre) {
+                  return ${genre.name};
+                })};
+            </li>
               <li class="list-group-item"><strong>Released:</strong> ${movie.release_date}</li>
               <li class="list-group-item"><strong>Rated:</strong> ${movie.vote_average}</li>
               <li class="list-group-item"><strong>IMDB Rating:</strong> ${movie.imdbRating}</li>
