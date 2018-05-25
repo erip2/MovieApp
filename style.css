@@ -2,6 +2,12 @@
   width:100%;
 }
 
+.card {
+  margin-right: 92px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
 @media(min-width:960px){
   #movies .col-md-3 .well{
     height: 390px;
